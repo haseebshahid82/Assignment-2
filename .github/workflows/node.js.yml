@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ develop ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -41,3 +41,8 @@ jobs:
        user_email: 'github-actions[bot]@users.noreply.github.com'         
        github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}         
        repository: ${{ github.repository }}
+    - name: Login to Heroku Container registry    
+      env:      
+         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}    
+         run: heroku container:login     
+         working-directory: my-app 
